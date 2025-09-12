@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { api } from "../services/api";
 import type { Flower, Shop } from "../types";
 import { useCart } from "../cart/useCart";
+import styles from "./ShopsPage.module.css";
 
 export default function ShopsPage() {
   const [shops, setShops] = useState<Shop[]>([]);
@@ -24,49 +25,37 @@ export default function ShopsPage() {
   }, [activeShopId]);
 
   return (
-    <div>
-      <h2>Choose a shop</h2>
-      <div style={{ display: "flex", gap: 8, marginBottom: 16 }}>
+    <div className={styles.container}>
+      <h2 className={styles.title}>Choose a shop</h2>
+
+      <div className={styles.shopButtons}>
         {shops.map((s) => (
           <button
             key={s.id}
             onClick={() => setActiveShopId(s.id)}
-            style={{
-              padding: "6px 10px",
-              border:
-                activeShopId === s.id ? "2px solid black" : "1px solid #ccc",
-            }}
+            className={`${styles.shopButton} ${
+              activeShopId === s.id ? styles.active : ""
+            }`}
           >
             {s.name}
           </button>
         ))}
       </div>
 
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))",
-          gap: 12,
-        }}
-      >
+      <div className={styles.flowersGrid}>
         {flowers.map((f) => (
-          <div
-            key={f.id}
-            style={{ border: "1px solid #eee", padding: 12, borderRadius: 8 }}
-          >
+          <div key={f.id} className={styles.card}>
             {f.imageUrl && (
-              <img
-                src={f.imageUrl}
-                alt={f.name}
-                style={{ width: "100%", borderRadius: 6, marginBottom: 8 }}
-              />
+              <img src={f.imageUrl} alt={f.name} className={styles.image} />
             )}
-            <div style={{ fontWeight: 600 }}>{f.name}</div>
-            <div style={{ opacity: 0.8, fontSize: 14 }}>{f.description}</div>
-            <div style={{ margin: "8px 0" }}>
-              {(f.priceCents / 100).toFixed(2)} zł
+            <div className={styles.name}>{f.name}</div>
+            <div className={styles.description}>{f.description}</div>
+            <div className={styles.price}>
+              {(f.priceCents / 100).toFixed(2)} €
             </div>
-            <button onClick={() => add(f)}>Add to cart</button>
+            <button onClick={() => add(f)} className={styles.addBtn}>
+              Add to cart
+            </button>
           </div>
         ))}
       </div>

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { api } from "../services/api";
 import type { OrderResponse } from "../types";
+import styles from "./OrderDetailsPage.module.css";
 
 export default function OrderDetailsPage() {
   const { id } = useParams();
@@ -15,31 +16,46 @@ export default function OrderDetailsPage() {
   if (!order) return <p>Loading...</p>;
 
   return (
-    <div>
-      <h2>Order #{order.id}</h2>
-      <div>
-        <b>Total:</b> {(order.totalCents / 100).toFixed(2)} zł
+    <div className={styles.container}>
+      <h2 className={styles.title}>Order Details</h2>
+      <h3 className={styles.shopName}>Order #{order.id}</h3>
+
+      <div className={styles.products}>
+        <h3>Products</h3>
+        <ul className={styles.productList}>
+          {order.items.map((i) => (
+            <li key={i.id} className={styles.productItem}>
+              {i.flower.imageUrl && (
+                <img
+                  src={i.flower.imageUrl}
+                  alt={i.flower.name}
+                  className={styles.image}
+                />
+              )}
+              <span className={styles.productName}>
+                {i.flower.name} × {i.quantity}
+              </span>
+              <span className={styles.productPrice}>
+                {((i.unitPriceCents * i.quantity) / 100).toFixed(2)} €
+              </span>
+            </li>
+          ))}
+        </ul>
       </div>
-      <div>
-        <b>Address:</b> {order.deliveryAddress}
+
+      <div className={styles.section}>
+        <b>Total:</b> {(order.totalCents / 100).toFixed(2)} €
       </div>
-      <div>
+      <div className={styles.section}>
+        <b>Delivery Address:</b> {order.deliveryAddress}
+      </div>
+      <div className={styles.section}>
         <b>Date:</b> {new Date(order.createdAt).toLocaleString()}
       </div>
 
-      <h3 style={{ marginTop: 16 }}>Products</h3>
-      <ul>
-        {order.items.map((i) => (
-          <li key={i.id}>
-            {i.flower.name} × {i.quantity} —{" "}
-            {((i.unitPriceCents * i.quantity) / 100).toFixed(2)} zł
-          </li>
-        ))}
-      </ul>
-
-      <p style={{ marginTop: 16 }}>
-        <Link to="/">Back to shops</Link>
-      </p>
+      <Link to="/" className={styles.backLink}>
+        Back to shops
+      </Link>
     </div>
   );
 }
