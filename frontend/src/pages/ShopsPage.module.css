@@ -1,39 +1,58 @@
 .container {
-  padding: 20px;
+  display: flex;
+  gap: 24px;
+  margin-top: 20px;
+  align-items: center;
+}
+
+.header {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+  width: 100%;
+}
+
+.sidebar {
+  min-width: 220px;
+  border-right: 1px solid #eee;
+  padding-right: 16px;
 }
 
 .title {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  color: #2c3e50;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 16px;
 }
 
 .shopButtons {
   display: flex;
+  flex-direction: column;
   gap: 10px;
-  margin-bottom: 20px;
 }
 
 .shopButton {
-  padding: 8px 14px;
+  padding: 10px 14px;
   border: 1px solid #ccc;
   border-radius: 6px;
-  background: white;
+  background: #f9f9f9;
   cursor: pointer;
-  transition: all 0.2s;
+  text-align: left;
+  transition: background 0.2s, border 0.2s;
 }
 
 .shopButton:hover {
-  background: #f5f5f5;
+  background: #f0f0f0;
 }
 
 .shopButton.active {
   border: 2px solid #2c3e50;
+  background: #eaf4ff;
   font-weight: bold;
 }
 
 .flowersGrid {
+  flex: 1;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 16px;
@@ -46,6 +65,10 @@
   background: #fff;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
   transition: transform 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
 .card:hover {
@@ -91,4 +114,58 @@
 
 .addBtn:hover {
   background: #2980b9;
+}
+
+.flowersSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sortBar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 8px;
+}
+
+.sortBtn {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.sortBtn:hover {
+  background: #f0f0f0;
+  border-color: #999;
+}
+
+.activeSort {
+  border: 2px solid #2c3e50;
+  background: #eaf4ff;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .shopButtons {
+    flex-direction: row;
+    flex-wrap: wrap;
+    min-width: 100%;
+    justify-content: center;
+  }
+
+  .shopButton {
+    flex: 1 1 auto;
+    text-align: center;
+  }
 }
