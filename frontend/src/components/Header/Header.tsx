@@ -14,6 +14,9 @@ export default function Header() {
           <Link to="/" className={styles.navLink}>
             Shops
           </Link>
+          <Link to="/favorites" className={styles.navLink}>
+            Favorites
+          </Link>
           <Link to="/cart" className={styles.navLink}>
             Cart
           </Link>

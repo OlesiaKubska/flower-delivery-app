@@ -1,0 +1,22 @@
+:root {
+  --breakpoint-mobile: 768px;
+  --breakpoint-tablet: 1024px;
+}
+
+@media (max-width: 768px) {
+  .mobile {
+    display: block;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .tablet {
+    display: block;
+  }
+}
+
+@media (min-width: 1024px) {
+  .desktop {
+    display: block;
+  }
+}

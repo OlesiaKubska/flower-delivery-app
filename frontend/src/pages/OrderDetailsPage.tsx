@@ -36,7 +36,7 @@ export default function OrderDetailsPage() {
                 {i.flower.name} × {i.quantity}
               </span>
               <span className={styles.productPrice}>
-                {((i.unitPriceCents * i.quantity) / 100).toFixed(2)} €
+                ${((i.unitPriceCents * i.quantity) / 100).toFixed(2)}
               </span>
             </li>
           ))}
@@ -44,7 +44,7 @@ export default function OrderDetailsPage() {
       </div>
 
       <div className={styles.section}>
-        <b>Total:</b> {(order.totalCents / 100).toFixed(2)} €
+        <b>Total:</b> ${(order.totalCents / 100).toFixed(2)}
       </div>
       <div className={styles.section}>
         <b>Delivery Address:</b> {order.deliveryAddress}

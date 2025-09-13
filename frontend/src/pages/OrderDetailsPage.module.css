@@ -1,24 +1,37 @@
-.container {
-  max-width: 600px;
-  margin: 40px auto;
-  padding: 20px;
+.container { 
+  width: 100%;
+  margin: 10px auto;
+  padding: 16px;
   background: #fff;
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  box-sizing: border-box;
 }
 
 .title {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: bold;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   color: #2c3e50;
   text-align: center;
 }
 
+.shopName {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #34495e;
+  text-align: center;
+}
+
 .section {
-  margin-top: 20px;
-  font-size: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  margin-top: 16px;
+  font-size: 14px;
   color: #34495e;
 }
 
@@ -31,9 +44,9 @@
 }
 
 .products h3 {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   color: #2c3e50;
 }
 
@@ -45,7 +58,9 @@
 
 .productItem {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
   padding: 8px 0;
   border-bottom: 1px solid #eee;
 }
@@ -56,8 +71,10 @@
 }
 
 .productPrice {
+  font-size: 14px;
   color: #27ae60;
   font-weight: bold;
+  margin-top: 4px;
 }
 
 .backLink {
@@ -73,8 +90,66 @@
 }
 
 .image {
-  width: 60px;
-  height: 60px;
+  width: 100%;
+  max-width: 200px;
+  height: auto;
   object-fit: cover;
   border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+@media (min-width: var(--breakpoint-mobile)) {
+  .container {
+    max-width: 90%;
+    margin: 20px auto;
+    padding: 20px;
+  }
+
+  .title {
+    font-size: 22px;
+  }
+
+  .products h3 {
+    font-size: 17px;
+  }
+
+  .productItem {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .image {
+    width: 120px;
+    height: auto;
+    margin-bottom: 0;
+  }
+
+  .productPrice {
+    font-size: 15px;
+    margin-top: 0;
+  }
+
+  .section {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 15px;
+  }
+}
+
+@media (min-width: var(--breakpoint-tablet)) {
+  .container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 24px;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+
+  .products h3 {
+    font-size: 18px;
+  }
 }

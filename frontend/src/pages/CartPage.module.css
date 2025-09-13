@@ -1,27 +1,40 @@
 .container {
-  padding: 20px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 12px;
+  box-sizing: border-box;
 }
 
 .title {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: bold;
-  margin-bottom: 20px;
-  color: #2c3e50;
+  margin-bottom: 16px;
   text-align: center;
+  color: #2c3e50;
 }
 
 .layout {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
+  grid-template-columns: 1fr; /* mobile-first */
+  gap: 16px;
+}
+
+.products {
+  order: 1;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 12px;
+  background: #fff;
 }
 
 .form {
+  order: 2;
+  margin-top: 16px;
   display: grid;
   gap: 12px;
   border: 1px solid #ddd;
   border-radius: 8px;
-  padding: 20px;
+  padding: 12px;
   background: #fafafa;
 }
 
@@ -66,30 +79,28 @@
   cursor: not-allowed;
 }
 
-.products {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 20px;
-  background: #fff;
-}
-
 .item {
   display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 12px;
+  flex-direction: column; /* mobile */
+  gap: 6px;
   padding: 10px;
   border-bottom: 1px solid #eee;
 }
 
+.image {
+  width: 100%;
+  max-width: 200px;
+  border-radius: 8px;
+}
+
 .itemName {
-  flex: 1;
   font-weight: 500;
   color: #2c3e50;
 }
 
 .itemInput {
-  width: 60px;
+  width: 100%;
+  max-width: 80px;
   text-align: center;
   padding: 4px;
   border: 1px solid #ccc;
@@ -99,8 +110,7 @@
 .itemPrice {
   font-weight: bold;
   color: #27ae60;
-  width: 80px;
-  text-align: right;
+  text-align: left;
 }
 
 .removeBtn {
@@ -116,21 +126,68 @@
 }
 
 .total {
-  margin-top: 16px;
+  margin-top: 12px;
   font-weight: bold;
-  font-size: 18px;
-  color: #2c3e50;
+  font-size: 16px;
   text-align: right;
+  color: #2c3e50;
 }
 
 .empty {
   color: #888;
   font-style: italic;
+  text-align: center;
 }
 
-.image {
-  width: 60px;
-  height: 60px;
-  object-fit: cover;
-  border-radius: 8px;
+/* ==== tablet ==== */
+@media (min-width: var(--breakpoint-mobile)) {
+  .title {
+    font-size: 22px;
+  }
+
+  .layout {
+    grid-template-columns: 1fr 1fr; /* form + products в ряд */
+    gap: 20px;
+  }
+
+  .form {
+    margin-top: 0;
+  }
+
+  .item {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .image {
+    width: 120px;
+    height: auto;
+  }
+
+  .itemPrice {
+    text-align: right;
+    width: 80px;
+    margin-top: 0;
+  }
+}
+
+/* ==== desktop ==== */
+@media (min-width: var(--breakpoint-tablet)) {
+  .container {
+    max-width: 1000px;
+    padding: 20px;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+
+  .layout {
+    gap: 24px;
+  }
+
+  .form,
+  .products {
+    padding: 20px;
+  }
 }

@@ -2,14 +2,21 @@ import { useEffect, useState } from "react";
 import { api } from "../services/api";
 import type { Flower, Shop } from "../types";
 import { useCart } from "../cart/useCart";
+import { useFavorites } from "../favorites/useFavorites";
 import styles from "./ShopsPage.module.css";
+
+type SortField = "price" | "date" | null;
+type SortOrder = "asc" | "desc";
 
 export default function ShopsPage() {
   const [shops, setShops] = useState<Shop[]>([]);
   const [activeShopId, setActiveShopId] = useState<number | undefined>();
   const [flowers, setFlowers] = useState<Flower[]>([]);
-  const [sortBy, setSortBy] = useState<"price" | "date" | null>(null);
+  const [sortBy, setSortBy] = useState<SortField>(null);
+  const [sortOrder, setSortOrder] = useState<SortOrder>("asc");
+
   const { add } = useCart();
+  const { toggleFavorite, isFavorite } = useFavorites();
 
   useEffect(() => {
     api.get<Shop[]>("/shops").then((res) => {
@@ -22,26 +29,42 @@ export default function ShopsPage() {
     const params = activeShopId
       ? { params: { shopId: activeShopId } }
       : undefined;
+
     api.get<Flower[]>("/flowers", params).then((res) => {
-      let sorted = res.data;
+      const sorted = [...res.data];
+
       if (sortBy === "price") {
-        sorted = [...sorted].sort((a, b) => a.priceCents - b.priceCents);
-      } else if (sortBy === "date") {
-        sorted = [...sorted].sort(
-          (a, b) =>
-            new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+        sorted.sort((a, b) =>
+          sortOrder === "asc"
+            ? a.priceCents - b.priceCents
+            : b.priceCents - a.priceCents
         );
+      } else if (sortBy === "date") {
+        sorted.sort((a, b) => {
+          const dateA = new Date(a.createdAt).getTime();
+          const dateB = new Date(b.createdAt).getTime();
+          return sortOrder === "asc" ? dateA - dateB : dateB - dateA;
+        });
       }
+
       setFlowers(sorted);
     });
-  }, [activeShopId, sortBy]);
+  }, [activeShopId, sortBy, sortOrder]);
+
+  const handleSort = (field: SortField) => {
+    if (sortBy === field) {
+      setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+    } else {
+      setSortBy(field);
+      setSortOrder("asc");
+    }
+  };
 
   return (
     <>
       <h1 className={styles.header}>🌸 Flower Delivery</h1>
 
       <div className={styles.container}>
-        {/* Ліва колонка */}
         <aside className={styles.sidebar}>
           <h2 className={styles.title}>Shops:</h2>
           <div className={styles.shopButtons}>
@@ -59,7 +82,6 @@ export default function ShopsPage() {
           </div>
         </aside>
 
-        {/* Права колонка */}
         <section className={styles.flowersSection}>
           <div className={styles.sortBar}>
             <span>Sort by:</span>
@@ -67,17 +89,17 @@ export default function ShopsPage() {
               className={`${styles.sortBtn} ${
                 sortBy === "price" ? styles.activeSort : ""
               }`}
-              onClick={() => setSortBy("price")}
+              onClick={() => handleSort("price")}
             >
-              Price
+              Price {sortBy === "price" && (sortOrder === "asc" ? "↑" : "↓")}
             </button>
             <button
               className={`${styles.sortBtn} ${
                 sortBy === "date" ? styles.activeSort : ""
               }`}
-              onClick={() => setSortBy("date")}
+              onClick={() => handleSort("date")}
             >
-              Date
+              Date {sortBy === "date" && (sortOrder === "asc" ? "↑" : "↓")}
             </button>
           </div>
 
@@ -90,10 +112,18 @@ export default function ShopsPage() {
                 <div className={styles.name}>{f.name}</div>
                 <div className={styles.description}>{f.description}</div>
                 <div className={styles.price}>
-                  {(f.priceCents / 100).toFixed(2)} €
+                  ${(f.priceCents / 100).toFixed(2)}
                 </div>
                 <button onClick={() => add(f)} className={styles.addBtn}>
                   Add to cart
+                </button>
+                <button
+                  onClick={() => toggleFavorite(f)}
+                  className={`${styles.favBtn} ${
+                    isFavorite(f.id) ? styles.activeFav : ""
+                  }`}
+                >
+                  {isFavorite(f.id) ? "★ Favorite" : "☆ Add to favorites"}
                 </button>
               </div>
             ))}

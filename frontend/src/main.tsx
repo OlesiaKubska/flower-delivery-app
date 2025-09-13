@@ -5,8 +5,10 @@ import App from "./App.tsx";
 import ShopsPage from "./pages/ShopsPage.tsx";
 import CartPage from "./pages/CartPage.tsx";
 import OrderDetailsPage from "./pages/OrderDetailsPage.tsx";
-import "./index.css";
+import "./styles/index.css";
 import { CartProvider } from "./cart/CartProvider";
+import { FavoritesProvider } from "./favorites/FavoritesProvider.tsx";
+import FavoritesPage from "./pages/FavoritesPage.tsx";
 
 const router = createBrowserRouter([
   {
@@ -16,6 +18,7 @@ const router = createBrowserRouter([
       { index: true, element: <ShopsPage /> },
       { path: "cart", element: <CartPage /> },
       { path: "order/:id", element: <OrderDetailsPage /> },
+      { path: "favorites", element: <FavoritesPage /> },
     ],
   },
 ]);
@@ -23,7 +26,9 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <CartProvider>
-      <RouterProvider router={router} />
+      <FavoritesProvider>
+        <RouterProvider router={router} />
+      </FavoritesProvider>
     </CartProvider>
   </React.StrictMode>
 );

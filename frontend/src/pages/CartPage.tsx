@@ -120,7 +120,7 @@ export default function CartPage() {
                 className={styles.itemInput}
               />
               <div className={styles.itemPrice}>
-                {((i.flower.priceCents * i.quantity) / 100).toFixed(2)} €
+                ${((i.flower.priceCents * i.quantity) / 100).toFixed(2)}
               </div>
               <button
                 onClick={() => remove(i.flower.id)}
@@ -133,7 +133,7 @@ export default function CartPage() {
 
           {items.length > 0 && (
             <div className={styles.total}>
-              Total: {(totalCents / 100).toFixed(2)} €
+              Total: ${(totalCents / 100).toFixed(2)}
             </div>
           )}
         </div>
