@@ -24,16 +24,34 @@ app.get("/shops", async (_req, res) => {
 // GET /flowers?shopId=1
 app.get("/flowers", async (req, res) => {
   const shopId = req.query.shopId ? Number(req.query.shopId) : undefined;
+  const page = req.query.page ? Number(req.query.page) : 1;
+  const limit = req.query.limit ? Number(req.query.limit) : 10;
+  
   const where = shopId ? { shopId } : {};
-  const flowers = await prisma.flower.findMany({
-    where,
-    orderBy: { createdAt: "desc" },
+
+  const [flowers, total] = await Promise.all([
+    prisma.flower.findMany({
+      where,
+      orderBy: { createdAt: "desc" },
+      skip: (page - 1) * limit,
+      take: limit,
+    }),
+    prisma.flower.count({ where }),
+  ]);
+
+  res.json({
+    data: flowers,
+    pagination: {
+      total,
+      page,
+      limit,
+      totalPages: Math.ceil(total / limit),
+    },
   });
-  res.json(flowers);
 });
 
 // POST /orders
-// body: { email, phone, deliveryAddress, items: [{ flowerId, quantity }] }
+
 const OrderSchema = z.object({
   email: z.string().email(),
   phone: z.string().min(5),

@@ -1,0 +1,92 @@
+{
+  "info": {
+    "name": "Flower Delivery API",
+    "_postman_id": "f1d3e1b2-4e7f-4a9a-96d9-bc23456789ab",
+    "description": "Test collection for Flower Delivery App backend",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Healthcheck",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:4000/health",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "4000",
+          "path": ["health"]
+        }
+      }
+    },
+    {
+      "name": "Get Shops",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:4000/shops",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "4000",
+          "path": ["shops"]
+        }
+      }
+    },
+    {
+      "name": "Get Flowers (by shopId)",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:4000/flowers?shopId=1",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "4000",
+          "path": ["flowers"],
+          "query": [
+            { "key": "shopId", "value": "1" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Create Order",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"test@example.com\",\n  \"phone\": \"123456789\",\n  \"deliveryAddress\": \"Warsaw, Main St 1\",\n  \"items\": [\n    { \"flowerId\": 1, \"quantity\": 2 },\n    { \"flowerId\": 2, \"quantity\": 1 }\n  ]\n}"
+        },
+        "url": {
+          "raw": "http://localhost:4000/orders",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "4000",
+          "path": ["orders"]
+        }
+      }
+    },
+    {
+      "name": "Get Order by ID",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:4000/orders/{{orderId}}",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "4000",
+          "path": ["orders", "{{orderId}}"]
+        }
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "orderId",
+      "value": "replace-with-your-order-id"
+    }
+  ]
+}
