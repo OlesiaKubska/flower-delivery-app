@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import { api } from "../services/api";
-import type { Flower, Shop } from "../types";
+import type {
+  Flower,
+  Shop,
+  FlowersParams,
+  SortField,
+  SortOrder,
+} from "../types";
 import { useCart } from "../cart/useCart";
 import { useFavorites } from "../favorites/useFavorites";
 import styles from "./ShopsPage.module.css";
-
-type SortField = "price" | "date" | null;
-type SortOrder = "asc" | "desc";
 
 export default function ShopsPage() {
   const [shops, setShops] = useState<Shop[]>([]);
@@ -14,6 +17,9 @@ export default function ShopsPage() {
   const [flowers, setFlowers] = useState<Flower[]>([]);
   const [sortBy, setSortBy] = useState<SortField>(null);
   const [sortOrder, setSortOrder] = useState<SortOrder>("asc");
+
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
   const { add } = useCart();
   const { toggleFavorite, isFavorite } = useFavorites();
@@ -26,30 +32,37 @@ export default function ShopsPage() {
   }, []);
 
   useEffect(() => {
-    const params = activeShopId
-      ? { params: { shopId: activeShopId } }
-      : undefined;
+    const params: FlowersParams = {
+      page,
+      limit: 6,
+    };
+    if (activeShopId) params.shopId = activeShopId;
 
-    api.get<Flower[]>("/flowers", params).then((res) => {
-      const sorted = [...res.data];
+    api
+      .get<{ data: Flower[]; pagination: { totalPages: number } }>("/flowers", {
+        params,
+      })
+      .then((res) => {
+        const sorted = [...res.data.data];
 
-      if (sortBy === "price") {
-        sorted.sort((a, b) =>
-          sortOrder === "asc"
-            ? a.priceCents - b.priceCents
-            : b.priceCents - a.priceCents
-        );
-      } else if (sortBy === "date") {
-        sorted.sort((a, b) => {
-          const dateA = new Date(a.createdAt).getTime();
-          const dateB = new Date(b.createdAt).getTime();
-          return sortOrder === "asc" ? dateA - dateB : dateB - dateA;
-        });
-      }
+        if (sortBy === "price") {
+          sorted.sort((a, b) =>
+            sortOrder === "asc"
+              ? a.priceCents - b.priceCents
+              : b.priceCents - a.priceCents
+          );
+        } else if (sortBy === "date") {
+          sorted.sort((a, b) => {
+            const dateA = new Date(a.createdAt).getTime();
+            const dateB = new Date(b.createdAt).getTime();
+            return sortOrder === "asc" ? dateA - dateB : dateB - dateA;
+          });
+        }
 
-      setFlowers(sorted);
-    });
-  }, [activeShopId, sortBy, sortOrder]);
+        setFlowers(sorted);
+        setTotalPages(res.data.pagination.totalPages);
+      });
+  }, [activeShopId, sortBy, sortOrder, page]);
 
   const handleSort = (field: SortField) => {
     if (sortBy === field) {
@@ -71,7 +84,10 @@ export default function ShopsPage() {
             {shops.map((s) => (
               <button
                 key={s.id}
-                onClick={() => setActiveShopId(s.id)}
+                onClick={() => {
+                  setActiveShopId(s.id);
+                  setPage(1);
+                }}
                 className={`${styles.shopButton} ${
                   activeShopId === s.id ? styles.active : ""
                 }`}
@@ -127,6 +143,25 @@ export default function ShopsPage() {
                 </button>
               </div>
             ))}
+          </div>
+
+          {/* ✅ Пагінація */}
+          <div className={styles.pagination}>
+            <button
+              onClick={() => setPage((p) => Math.max(1, p - 1))}
+              disabled={page === 1}
+            >
+              Prev
+            </button>
+            <span>
+              Page {page} of {totalPages}
+            </span>
+            <button
+              onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+              disabled={page === totalPages}
+            >
+              Next
+            </button>
           </div>
         </section>
       </div>

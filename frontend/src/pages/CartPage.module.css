@@ -15,7 +15,7 @@
 
 .layout {
   display: grid;
-  grid-template-columns: 1fr; /* mobile-first */
+  grid-template-columns: 1fr;
   gap: 16px;
 }
 
@@ -81,7 +81,7 @@
 
 .item {
   display: flex;
-  flex-direction: column; /* mobile */
+  flex-direction: column;
   gap: 6px;
   padding: 10px;
   border-bottom: 1px solid #eee;
@@ -139,14 +139,13 @@
   text-align: center;
 }
 
-/* ==== tablet ==== */
-@media (min-width: var(--breakpoint-mobile)) {
+@media (min-width: 768px) {
   .title {
     font-size: 22px;
   }
 
   .layout {
-    grid-template-columns: 1fr 1fr; /* form + products в ряд */
+    grid-template-columns: 1fr 1fr;
     gap: 20px;
   }
 
@@ -171,8 +170,7 @@
   }
 }
 
-/* ==== desktop ==== */
-@media (min-width: var(--breakpoint-tablet)) {
+@media (min-width: 1024px) {
   .container {
     max-width: 1000px;
     padding: 20px;

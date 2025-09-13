@@ -34,3 +34,13 @@ export type OrderResponse = {
     flower: Flower;
   }>;
 };
+
+export type SortField = "price" | "date" | null;
+
+export type SortOrder = "asc" | "desc";
+
+export type FlowersParams = {
+  shopId?: number;
+  page: number;
+  limit: number;
+};

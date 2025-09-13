@@ -98,7 +98,7 @@
   margin-bottom: 8px;
 }
 
-@media (min-width: var(--breakpoint-mobile)) {
+@media (min-width: 768px) {
   .container {
     max-width: 90%;
     margin: 20px auto;
@@ -138,7 +138,7 @@
   }
 }
 
-@media (min-width: var(--breakpoint-tablet)) {
+@media (min-width: 1024px) {
   .container {
     max-width: 600px;
     margin: 40px auto;
