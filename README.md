@@ -5,6 +5,27 @@ Built with **React + TypeScript (frontend)** and **Node.js + Express + Prisma (b
 
 ---
 
+## 🛠️ Tech Stack
+
+### Frontend
+
+![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript&logoColor=white)
+![React Router](https://img.shields.io/badge/React%20Router-6-CA4245?logo=react-router&logoColor=white)
+![Formik](https://img.shields.io/badge/Formik-2.4-FF6F00?logo=formik&logoColor=white)
+![Yup](https://img.shields.io/badge/Yup-Validation-4A90E2)
+![Google Maps API](https://img.shields.io/badge/Google%20Maps%20API-Places%20%7C%20Autocomplete-4285F4?logo=googlemaps&logoColor=white)
+![CSS Modules](https://img.shields.io/badge/CSS-Modules-1572B6?logo=css3&logoColor=white)
+
+### Backend
+
+![Node.js](https://img.shields.io/badge/Node.js-20-339933?logo=node.js&logoColor=white)
+![Express.js](https://img.shields.io/badge/Express.js-4-000000?logo=express&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript&logoColor=white)
+![Prisma](https://img.shields.io/badge/Prisma-ORM-2D3748?logo=prisma&logoColor=white)
+
+---
+
 ## 📂 Project Structure
 
 ```bash
@@ -141,28 +162,6 @@ npm run dev
 
 ---
 
-## 🛠️ Tech Stack
-
-### Frontend
-
-![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript&logoColor=white)
-![React Router](https://img.shields.io/badge/React%20Router-6-CA4245?logo=react-router&logoColor=white)
-![Formik](https://img.shields.io/badge/Formik-2.4-FF6F00?logo=formik&logoColor=white)
-![Yup](https://img.shields.io/badge/Yup-Validation-4A90E2)
-![Google Maps API](https://img.shields.io/badge/Google%20Maps%20API-Places%20%7C%20Autocomplete-4285F4?logo=googlemaps&logoColor=white)
-![CSS Modules](https://img.shields.io/badge/CSS-Modules-1572B6?logo=css3&logoColor=white)
-
-### Backend
-
-![Node.js](https://img.shields.io/badge/Node.js-20-339933?logo=node.js&logoColor=white)
-![Express.js](https://img.shields.io/badge/Express.js-4-000000?logo=express&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript&logoColor=white)
-![Prisma](https://img.shields.io/badge/Prisma-ORM-2D3748?logo=prisma&logoColor=white)
-![SQLite](https://img.shields.io/badge/SQLite-Dev-003B57?logo=sqlite&logoColor=white)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Prod-4169E1?logo=postgresql&logoColor=white)
-
----
 
 ## 📖 Author
 
@@ -171,4 +170,5 @@ npm run dev
 Full Stack Developer | Flower Delivery Test Project
 
 ---
+
 
