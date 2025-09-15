@@ -24,6 +24,11 @@ Built with **React + TypeScript (frontend)** and **Node.js + Express + Prisma (b
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript&logoColor=white)
 ![Prisma](https://img.shields.io/badge/Prisma-ORM-2D3748?logo=prisma&logoColor=white)
 
+### Deployment 
+
+- Frontend [![Vercel](https://vercelbadge.vercel.app/api/OlesiaKubska/flower-delivery-app?style=for-the-badge)](https://flower-delivery-app.vercel.app)
+- Render (backend + PostgreSQL) [![Render](https://img.shields.io/badge/Render-Backend%20API-46E3B7?logo=render&logoColor=white&style=for-the-badge)](https://flower-delivery-app-84aa.onrender.com)
+
 ---
 
 ## 📂 Project Structure
@@ -65,7 +70,14 @@ flower-delivery-app/
 
 ---
 
-## ⚙️ Installation
+## ⚙️ Installation (Production)
+
+-Frontend: [https://flower-delivery-app.vercel.app](https://flower-delivery-app.vercel.app)  
+-Backend API: [https://flower-delivery-app-84aa.onrender.com](https://flower-delivery-app-84aa.onrender.com)
+
+---
+
+## ⚙️ Installation (Local Development)
 
 ### 1. Clone repository
 
@@ -150,16 +162,13 @@ npm run dev
 
 ---
 
-## 📡 API Endpoints
+## 📡 API Endpoints (Production)
 
-- `GET /shops` – list shops
-
-- `GET /shops/:id/flowers` – flowers in shop
-
-- `POST /orders` – create order (address + coordinates)
-
-- `GET /orders/:id` – order details
-
+- [GET /shops](https://flower-delivery-app-84aa.onrender.com/shops) – list shops  
+- [GET /flowers](https://flower-delivery-app-84aa.onrender.com/flowers) – list all flowers  
+- [POST /orders](https://flower-delivery-app-84aa.onrender.com/orders) – create order (address + coordinates)  
+- [GET /orders/:id](https://flower-delivery-app-84aa.onrender.com/orders/1) – order details
+  
 ---
 
 
@@ -170,5 +179,6 @@ npm run dev
 Full Stack Developer | Flower Delivery Test Project
 
 ---
+
 
 
