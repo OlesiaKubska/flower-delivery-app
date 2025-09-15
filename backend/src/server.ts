@@ -10,6 +10,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.get("/", (req, res) => {
+  res.send("Backend is running 🚀");
+})
+
 // Healthcheck
 app.get("/health", (_req, res) => {
   res.json({ ok: true });
@@ -115,6 +119,6 @@ app.get("/orders/:id", async (req, res) => {
 });
 
 const PORT = process.env.PORT ? Number(process.env.PORT) : 4000;
-app.listen(PORT, () => {
-  console.log(`Backend listening on http://localhost:${PORT}`);
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`Backend running on port ${PORT}`);
 });
